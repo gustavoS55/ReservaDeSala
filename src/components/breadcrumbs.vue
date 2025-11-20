@@ -5,7 +5,7 @@
         <router-link to="/"> Home </router-link>
       </li>
       <li>
-        <router-link to="/tutors">
+        <router-link to="/salas">
           <slot name="model"></slot>
         </router-link>
       </li>

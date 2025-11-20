@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar bg-base-300 shadow">
+  <div class="navbar bg-[#ffffff]   shadow">
     <div class="flex-none">
       <button class="btn btn-square btn-ghost" @click="toggleSidebar">
         <svg
@@ -18,7 +18,7 @@
       </button>
     </div>
     <div class="flex-1">
-      <a class="mx-4 text-xl font-light">PetClinic - Clínica Veterinária</a>
+      <a class="mx-4 text-xl font-light">Reserva Fácil </a>
     </div>
     <div class="flex-none">
       <button class="btn btn-square btn-ghost">

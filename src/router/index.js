@@ -8,15 +8,33 @@ const router = createRouter({
       name: 'home',
       component: () => import('@/views/dashboard.vue'),
     },
+    
     {
-      path: '/tutors',
+      path: '/reserva',
       children: [
-        { path: '', component: () => import('@/views/tutors/index.vue')},
-        { path: 'add', component: () => import('@/views/tutors/add.vue')},
-        { path: ':id/edit', component: () => import('@/views/tutors/edit.vue')},
-        { path: ':id/show', component: () => import('@/views/tutors/show.vue')},
+        { path: '', name: 'salas.index', component: () => import('@/views/reservas/index.vue')},
+        { path: 'add', name: 'salas.add', component: () => import('@/views/reservas/add.vue')},
+        { path: ':id/edit', name: 'salas.edit', component: () => import('@/views/reservas/edit.vue')},
+        
       ]
-    }
+    },
+    {
+      path: '/professores',
+      children:[
+        {path: '', name: 'professores.index',component: () => import('@/views/professores/index.vue')},
+        {path: 'addProf', name: 'professores.add', component: () => import ('@/views/professores/addProf.vue')},
+      ]
+    
+    },
+    {
+      path: '/salas',
+      children:[
+        {path: '', name: 'sala.index',component: () => import('@/views/salas/index.vue')},
+        {path: '', name: 'sala.add',component: () => import('@/views/salas/addSalas.vue')},
+       
+      ]
+    
+    },
   ],
 })
 

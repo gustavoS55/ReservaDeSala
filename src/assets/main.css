@@ -2,3 +2,7 @@
 @plugin "daisyui" {
   themes: all;
 }
+ html {
+    /* Cinza claro do Tailwind (gray-100) */
+    background-color: #f3f4f9;
+}
