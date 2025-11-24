@@ -22,10 +22,9 @@
             :key="professor.key" 
             :value="professor.key"> 
             
-            {{ professor.nome }} 
+            {{ professor.data.nome }} 
           </option>
         </select>
-        
         <h3 class="mt-4 text-lg font-medium">Período da Reserva</h3>
         
         <label class="label">Data da Reserva</label>

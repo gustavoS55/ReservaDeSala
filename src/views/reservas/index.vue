@@ -72,8 +72,6 @@ import { useReserva } from "@/composables/useReservas";
 
 const router = useRouter();
 
-// 2. DESESTRUTURAÇÃO: Obtém a lista de reservas mapeada.
-// O Localbase, onMounted, e capturarReservas estão AGORA DENTRO do useReserva.js.
 const { reservas } = useReserva(); 
 
 const reservar = () => {

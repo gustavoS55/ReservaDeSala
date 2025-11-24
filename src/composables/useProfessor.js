@@ -27,7 +27,7 @@ export function useProfessor() {
                 console.warn("DB não inicializado. Tentando capturar professores mais tarde.");
                 return;
             }
-            professores.value = await db.collection("professores").get();
+            professores.value = await db.collection("professores").get({keys: true});
         } catch (error) {
             console.error("Erro ao buscar professores:", error);
         }

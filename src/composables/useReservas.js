@@ -1,4 +1,4 @@
-// src/composables/useReservas.js
+
 
 import { reactive, onMounted, ref } from "vue";
 import Localbase from "localbase";
@@ -7,39 +7,40 @@ export function useReserva() {
     
     let db; 
     
-    // 1. Estado Reativo: Lista para o componente de listagem
+    
     const reservas = ref([]); 
 
-    // 2. Estado Reativo: Formulário de adição
+    
     const form = reactive({
-        nome: "", // Nome da Sala
-        responsavelKey: "", // ID do Professor
+        nome: "", 
+        responsavelKey: "", 
         dataReserva: "",
         horaInicio: "",
         horaFim: "",
     });
 
-    // Função que busca e faz o JOIN
+
     const capturarReservas = async () => {
         if (!db) return; 
 
         try {
-            // Busca Reservas e Professores em paralelo
+            
             const [reservasRaw, professoresRaw] = await Promise.all([
                 db.collection("reservas").get(),
-                db.collection("professores").get()
+                db.collection("professores").get({keys:true})
             ]);
 
-            // Cria o mapa de ID para Nome
+        
             const professoresMap = professoresRaw.reduce((acc, prof) => {
-                acc[prof.key] = prof.nome;
+                acc[prof.key] = prof.data.nome;
                 return acc;
             }, {});
 
-            // Mapeia a lista, injetando o nome do responsável
+            console.log(professoresMap)
+
             reservas.value = reservasRaw.map(reserva => ({
                 ...reserva,
-                // INJETADO: Campo que será usado na listagem
+
                 responsavelNome: professoresMap[reserva.responsavelKey] || 'Professor Não Encontrado'
             }));
 
@@ -50,14 +51,14 @@ export function useReserva() {
     
     onMounted(() => {
         db = new Localbase("dbReserv"); 
-        capturarReservas(); // Carrega a lista na inicialização
+        capturarReservas();
     });
 
     const reservarSala = async () => {
         if (!db) return false; 
         
         try {
-            // Salva no DB usando as propriedades que o listador espera (nomeSala, responsavelKey)
+            console.log(form)
             await db.collection("reservas").add({
                 nomeSala: form.nome, 
                 responsavelKey: form.responsavelKey, 
@@ -67,14 +68,12 @@ export function useReserva() {
                 dataCriacao: new Date().toISOString(),
             });
             
-            // Limpa o formulário e...
             form.nome = "";
             form.responsavelKey = "";
             form.dataReserva = "";
             form.horaInicio = "";
             form.horaFim = "";
             
-            // Recarrega a lista para mostrar a nova reserva
             await capturarReservas(); 
 
             return true;
@@ -88,7 +87,7 @@ export function useReserva() {
     return {
         form,
         reservarSala,
-        reservas, // Exporta a lista mapeada
+        reservas, 
         capturarReservas
     };
 }
