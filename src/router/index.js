@@ -12,9 +12,8 @@ const router = createRouter({
     {
       path: '/reserva',
       children: [
-{ path: '', name: 'salas.index', component: () => import('@/views/reservas/index.vue')},
-        { path: 'add', name: 'salas.add', component: () => import('@/views/reservas/add.vue')},
-        { path: ':id/edit', name: 'salas.edit', component: () => import('@/views/reservas/edit.vue')},
+        { path: '', name: 'salas.index', component: () => import('@/views/reservas/index.vue')},
+        { path: 'add', name: 'salas.add', component: () => import('@/views/reservas/add.vue')}
         
       ]
     },
