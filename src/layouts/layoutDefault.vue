@@ -15,7 +15,6 @@
       <!-- Área de Conteúdo (Rotas) -->
       <main class="flex-1 overflow-y-auto p-6">
         <router-view></router-view>
-        <!-- Em React/Vue, você colocaria <Outlet /> ou <router-view> aqui -->
       </main>
     </div>
   </div>
