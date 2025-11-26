@@ -36,10 +36,12 @@
                 <th>Data</th>
                 <th>Horário</th>
               </tr>
+              
             </thead>
             <tbody>
             <tr v-for="reserva in reservas" :key="reserva.key"> <th>
               </th>
+              
               
               <td>
                 <div class="font-bold">{{ reserva.nomeSala }}</div>
@@ -56,6 +58,7 @@
               <td>
                 <span class="badge badge-outline text-gray-700">{{ reserva.horaInicio }} - {{ reserva.horaFim }}</span>
               </td>
+              
             </tr>
           </tbody>
           </table>
@@ -67,12 +70,26 @@
  <script setup>
 import breadcrumbs from "@/components/breadcrumbs.vue";
 import { useRouter } from "vue-router";
-// 1. IMPORTAÇÃO CRÍTICA: Importa o Composable que faz o JOIN de dados
+
 import { useReserva } from "@/composables/useReservas"; 
 
 const router = useRouter();
 
-const { reservas } = useReserva(); 
+const { reservas, excluirReserva } = useReserva();
+
+const handleExcluir = async (docId) => {
+  if (confirm("Tem certeza que deseja excluir esta reserva?")) {
+    const sucesso = await excluirReserva(docId);
+    if (sucesso) {
+      // O useReserva já deve ter atualizado a lista.
+      // Você pode adicionar uma notificação aqui, se tiver uma.
+      console.log(`Reserva ${docId} excluída com sucesso!`);
+    } else {
+      alert("Erro ao excluir a reserva.");
+    }
+  }
+};
+
 
 const reservar = () => {
   // Navega para a rota de adicionar reserva
